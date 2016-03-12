@@ -32,8 +32,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       next();
     }
 
+    function auth(ctx, next) {
+      app.authenticate(ctx, next);
+    }
+
     // Routes
     page('*', scrollToTop, closeDrawer, function(ctx, next) {
+      next();
+    });
+
+    page('/logout', function() {
+      app.route = 'logout';
+    });
+
+    page('*', auth, function(ctx, next) {
       next();
     });
 

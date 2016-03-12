@@ -1,11 +1,11 @@
 'use strict';
 
-class BaseCHMSApi {
-
-  constructor(apiName, version) {
+export class BaseCHMSApi {
+  constructor(app, apiName, version) {
     this._loadedPromise = null;
     this.apiName = apiName;
     this.version = version;
+    this.app = app;
   }
 
   get loaded() {
@@ -31,17 +31,5 @@ class BaseCHMSApi {
     }
 
     return this._loadedPromise;
-  }
-}
-
-export class CHMSApi extends BaseCHMSApi {
-  constructor() {
-    super('chms', 'v1');
-    this._FROM_HEADER_REGEX = new RegExp(/"?(.*?)"?\s?<(.*)>/);
-  }
-  fetchMe(q) {
-    return this.init().then(api => {
-      console.log('fetch me!');
-    });
   }
 }

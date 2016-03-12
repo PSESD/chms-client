@@ -44,5 +44,9 @@
     "run-sequence": "^1.1.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "deamd": "^1.0.0",
+    "deamdify": "^0.2.0"
   }
 }

@@ -18,6 +18,7 @@ var isProd = false;
 
 var DIST = 'dist';
 var SRC = 'app';
+var TMP = '.tmp';
 
 var dist = function(subpath) {
   return !subpath ? DIST : path.join(DIST, subpath);
@@ -25,6 +26,10 @@ var dist = function(subpath) {
 
 var src = function(subpath) {
   return !subpath ? SRC : path.join(SRC, subpath);
+};
+
+var tmp = function(subpath) {
+  return !subpath ? TMP : path.join(TMP, subpath);
 };
 
 
@@ -44,7 +49,7 @@ function uglifyJS() {
 
 /** Clean */
 gulp.task('clean', function(done) {
-  return del(['dist', src('scripts/bundle.js')]);
+  return del([dist(), tmp(), src('scripts/bundle.js'), tmp()]);
 });
 
 /** Styles */
@@ -94,17 +99,23 @@ function buildBundle(file) {
   return browserify({
     entries: [file],
     debug: isProd
-  })
-  .transform(babelify, {presets: ['es2015']}) // es6 -> e5
+  }).transform(babelify, {presets: ['es2015']}) // es6 -> e5
   .bundle();
 }
 
-gulp.task('jsbundle', function() {
+gulp.task('deamd', function() {
+  return browserify(src('./bower_components/orbit.js/orbit.js'))
+  .transform('deamdify')
+  .bundle()
+  .pipe(source('amd.packages.js'))
+  .pipe(gulp.dest(tmp('./scripts')));
+});
+
+gulp.task('jsbundle', ['deamd'], function() {
   console.log('==Building JS bundle==');
 
   //var dest = isProd ? 'dist' : '';
   var dest = dist();
-
   return buildBundle(src('./scripts/app.js'))
     .pipe(source('bundle.js'))
     // .pipe($.streamify(uglifyJS()))
@@ -192,7 +203,7 @@ gulp.task('vulcanize', function() {
     }))
     .pipe($.crisper()) // Separate JS into its own file for CSP compliance and reduce html parser load.
     .pipe($.if('*.html', minifyHtml())) // Minify html output
-    .pipe($.if('*.js', uglifyJS())) // Minify js output
+    // .pipe($.if('*.js', uglifyJS())) // Minify js output
     .pipe(gulp.dest(dist('./elements')))
 });
 
@@ -203,7 +214,7 @@ gulp.task('watch', function() {
   // gulp.watch('./sw-import.js', ['serviceworker']);
   gulp.watch(src('./elements/**/*.html'), ['vulcanize']);
   gulp.watch(src('./images/**/*.*'), ['images']);
-  gulp.watch(src('./scripts/**/*.js'), ['js', 'jsbundle']);
+  gulp.watch([src('./data/**/*.*'), src('./scripts/**/*.js')], ['js', 'jsbundle']);
 });
 
 /** Main tasks */
