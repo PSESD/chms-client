@@ -28,10 +28,31 @@ class OauthProvider implements ServiceProviderInterface
       return $provider;
     };
 
-    $container['token'] = function() {
-      return function() {
+    $container['token'] = function() use ($container) {
+      return function() use ($container) {
         if (!empty($_SESSION['token']['access_token'])) {
-          return new AccessToken($_SESSION['token']);
+          $accessToken = new AccessToken($_SESSION['token']);
+          $expires = $accessToken->getExpires();
+          if (($expires - $container['settings']['expiresBuffer']) < time()) {
+            unset($_SESSION['token']);
+            return $container['refreshToken']($accessToken);
+          }
+          return $accessToken;
+        }
+        unset($_SESSION['token']);
+        return false;
+      };
+    };
+
+    $container['refreshToken'] = function() use ($container) {
+      return function(AccessToken $oldToken) use ($container) {
+        $provider = $container['oauth'];
+        $accessToken = $provider->getAccessToken('refresh_token', [
+          'refresh_token' => $oldToken->getRefreshToken()
+        ]);
+        if (!empty($accessToken)) {
+          $_SESSION['token'] = $accessToken->jsonSerialize();
+          return $accessToken;
         }
         return false;
       };
@@ -51,7 +72,7 @@ class OauthProvider implements ServiceProviderInterface
         } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
           return false;
         }
-        $container['cache']->set($cacheKey, $accessToken, (int)$accessToken->getExpires()-120);
+        $container['cache']->set($cacheKey, $accessToken, (int)$accessToken->getExpires()-$container['settings']['expiresBuffer']);
         return $accessToken;
       };
     };

@@ -14,7 +14,7 @@ namespace CHMS\Client\Http\Actions;
  * @since 1.0
  */
 class ProviderProxyAction
-	extends BaseAction
+	extends BaseProxyAction
 {
   /**
    * @inheritdoc
@@ -32,11 +32,8 @@ class ProviderProxyAction
 		return '/api/provider/{provider}{uri:.*}';
 	}
 
-  /**
-   * @inheritdoc
-   */
-  public static function run($request, $response, $args, $container)
-	{
-    var_dump($request);exit;
+	public static function getClient($container, $request, $args)
+  {
+    return $container['clients']->getProviderClient($args['provider']);
   }
 }

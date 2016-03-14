@@ -5,3 +5,4 @@ client/bower_components
 .publish/
 docker-compose.yml
 /vendor/
+.env

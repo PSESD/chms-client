@@ -14,16 +14,8 @@ namespace CHMS\Client\Http\Actions;
  * @since 1.0
  */
 class HubProxyAction
-	extends BaseAction
+	extends BaseProxyAction
 {
-  /**
-   * @inheritdoc
-   */
-  public static function getMethod()
-  {
-    return '*';
-  }
-
   /**
    * @inheritdoc
    */
@@ -32,11 +24,9 @@ class HubProxyAction
 		return '/api/hub{uri:.*}';
 	}
 
-  /**
-   * @inheritdoc
-   */
-  public static function run($request, $response, $args, $container)
-	{
-    var_dump($request);exit;
+
+  public static function getClient($container, $request, $args)
+  {
+    return $container['clients']->getHubClient();
   }
 }

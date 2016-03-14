@@ -128,7 +128,8 @@ gulp.task('jsbundle', ['deamd'], function() {
 /** Root */
 gulp.task('root', function() {
   gulp.src([
-      src('./*.*')
+      src('./*.*'),
+      src('./.user.ini')
     ])
     .pipe($.replace(/@VERSION@/g, getVersion()))
     .pipe(gulp.dest(dist()));

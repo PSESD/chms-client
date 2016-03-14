@@ -1,11 +1,20 @@
 <?php
 $config = include(__DIR__ . DIRECTORY_SEPARATOR . 'base.php');
-$config['config']['oauth'] = [
-  'clientId'                => 'demoapp',    // The client ID assigned to you by the provider
-  'clientSecret'            => 'demopass',   // The client password assigned to you by the provider
-  'redirectUri'             => 'http://example.com/your-redirect-url/',
-  'urlAuthorize'            => 'http://brentertainment.com/oauth2/lockdin/authorize',
-  'urlAccessToken'          => 'http://brentertainment.com/oauth2/lockdin/token',
-  'urlResourceOwnerDetails' => 'http://brentertainment.com/oauth2/lockdin/resource'
+$config['settings']['oauth'] = [
+  'clientId'                => 'cd66c45b-a2bc-4c5c-8b24-5dbcd781a927',    // The client ID assigned to you by the provider
+  'clientSecret'            => 'foobar',   // The client password assigned to you by the provider
+  'redirectUri'             => 'http://chms-client.docker/resolve',
+  'urlAuthorize'            => 'http://chms-auth.docker/oauth/authorize',
+  'urlAccessToken'          => 'http://chms-auth.docker/oauth/access_token',
+  'urlResourceOwnerDetails' => ''
+];
+$config['settings']['resourceServers'] = [];
+$config['settings']['resourceServers']['_provider'] = [
+  'clientId'                => 'cd66c45b-a2bc-4c5c-8b24-5dbcd781a927'
+];
+$config['settings']['resourceServers']['hub'] = [
+  'clientId'                => 'cd66c45b-a2bc-4c5c-8b24-5dbcd781a927',
+  'clientSecret'            => 'foobar',
+  'baseUri'                 => 'http://chms-api.docker'
 ];
 return $config;

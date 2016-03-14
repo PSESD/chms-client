@@ -4,21 +4,70 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6ab9460ba3378fef9c5bd1b5cc24a270",
-    "content-hash": "6b0c786bc5fd35c696e958c33bf9a4e6",
+    "hash": "bd0ec9270b186b10975ea10bd4fa40ab",
+    "content-hash": "8998c5d3e359feab0e907297840385d5",
     "packages": [
+        {
+            "name": "art4/json-api-client",
+            "version": "0.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Art4/json-api-client.git",
+                "reference": "fd270d5ccf53c6ce5e308230045a5efc77aecd4f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Art4/json-api-client/zipball/fd270d5ccf53c6ce5e308230045a5efc77aecd4f",
+                "reference": "fd270d5ccf53c6ce5e308230045a5efc77aecd4f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Art4\\JsonApiClient\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL2"
+            ],
+            "authors": [
+                {
+                    "name": "Artur Weigandt",
+                    "email": "art4@wlabs.de",
+                    "homepage": "http://wlabs.de"
+                }
+            ],
+            "description": "JSON API client",
+            "homepage": "https://github.com/Art4/json-api-client",
+            "keywords": [
+                "JSON-API",
+                "api",
+                "client",
+                "json",
+                "reader",
+                "validator"
+            ],
+            "time": "2015-12-28 02:20:34"
+        },
         {
             "name": "canis/slim-boot",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/canis-io/slim-boot.git",
-                "reference": "9827838d1a89feb5273465a2a18c1ff10424b46b"
+                "reference": "366f7779ab0cd55198f9c432e968eeb895b0a124"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/canis-io/slim-boot/zipball/9827838d1a89feb5273465a2a18c1ff10424b46b",
-                "reference": "9827838d1a89feb5273465a2a18c1ff10424b46b",
+                "url": "https://api.github.com/repos/canis-io/slim-boot/zipball/366f7779ab0cd55198f9c432e968eeb895b0a124",
+                "reference": "366f7779ab0cd55198f9c432e968eeb895b0a124",
                 "shasum": ""
             },
             "require": {
@@ -51,7 +100,7 @@
                 }
             ],
             "description": "Adds light bootstrapping with events to Slim",
-            "time": "2016-03-14 01:22:47"
+            "time": "2016-03-14 03:35:30"
         },
         {
             "name": "container-interop/container-interop",
@@ -815,6 +864,45 @@
                 "routing"
             ],
             "time": "2015-06-18 19:15:47"
+        },
+        {
+            "name": "pavelsterba/http-exceptions",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pavelsterba/http-exceptions.git",
+                "reference": "b8f2599bf5b442cfb4378d4761d63a618e120689"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pavelsterba/http-exceptions/zipball/b8f2599bf5b442cfb4378d4761d63a618e120689",
+                "reference": "b8f2599bf5b442cfb4378d4761d63a618e120689",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "HttpException\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pavel Sterba",
+                    "email": "email@pavelsterba.com"
+                }
+            ],
+            "description": "HTTP status code exceptions for PHP.",
+            "homepage": "https://github.com/pavelsterba/http-exceptions",
+            "keywords": [
+                "exceptions",
+                "http",
+                "php"
+            ],
+            "time": "2015-12-18 12:16:24"
         },
         {
             "name": "pimple/pimple",

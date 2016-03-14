@@ -56,8 +56,8 @@ class ResolveAction
         return $container['redirectToIntent']($request, $response, $args);
       } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
         return $response->withStatus(500)
-                             ->withHeader('Content-Type', 'text/html')
-                              ->write('Invalid identity provider response! ' . $e->getMessage());
+                        ->withHeader('Content-Type', 'text/html')
+                        ->write('Invalid identity provider response! ' . $e->getMessage());
       }
     }
   }
