@@ -10,6 +10,7 @@ namespace CHMS\Client\Providers;
 use Pimple\ServiceProviderInterface;
 use Pimple\Container;
 use CHMS\Client\Http\Middleware\Session;
+use CHMS\Client\Services\Cache;
 use canis\slim\boot\ApplicationEngine as App;
 use League\OAuth2\Client\Token\AccessToken;
 
@@ -25,9 +26,14 @@ class AppProvider implements ServiceProviderInterface
   {
     $app = App::instance();
     $app->add(Session::class .':run');
+    $container['cache'] = function() use ($container) {
+      return new Cache($container['redis']);
+    };
+
     $container['session'] = function() use ($container) {
       return new \Predis\Session\Handler($container['redis']);
     };
+
     $container['redirectToIntent'] = function() {
       return function ($request, $response, $args) {
           return $response->withRedirect('/');

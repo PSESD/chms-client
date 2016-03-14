@@ -31,7 +31,7 @@ class OauthProvider implements ServiceProviderInterface
     $container['token'] = function() {
       return function() {
         if (!empty($_SESSION['token']['access_token'])) {
-          return new AccessToken($_SESSION['token']['access_token']);
+          return new AccessToken($_SESSION['token']);
         }
         return false;
       };
@@ -40,9 +40,9 @@ class OauthProvider implements ServiceProviderInterface
     $container['clientToken'] = function() use ($container) {
       return function() use ($container) {
         $cacheKey = '__clientKey';
-        $cache = $container['redis']->get($cacheKey);
+        $cache = $container['cache']->get($cacheKey);
         if (!empty($cache)) {
-          $accessToken = new AccessToken(json_decode($cache, true));
+          $accessToken = new AccessToken($cache);
           return $accessToken;
         }
         $provider = $container['oauth'];
@@ -51,8 +51,7 @@ class OauthProvider implements ServiceProviderInterface
         } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
           return false;
         }
-        $container['redis']->set($cacheKey, json_encode($accessToken));
-        $container['redis']->expireat($cacheKey, (int)$accessToken->getExpires()-120);
+        $container['cache']->set($cacheKey, $accessToken, (int)$accessToken->getExpires()-120);
         return $accessToken;
       };
     };

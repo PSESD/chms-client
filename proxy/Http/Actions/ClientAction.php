@@ -7,6 +7,9 @@
  */
 namespace CHMS\Client\Http\Actions;
 
+use canis\slim\boot\actions\MiddlewareInterface;
+use CHMS\Client\Http\Middleware\Auth;
+
 /**
  * Client Action
  *
@@ -15,6 +18,7 @@ namespace CHMS\Client\Http\Actions;
  */
 class ClientAction
 	extends BaseAction
+	implements MiddlewareInterface
 {
   /**
    * @inheritdoc
@@ -40,4 +44,11 @@ class ClientAction
     $body = $response->getBody();
     $body->write(file_get_contents(APP_BASE_PATH . DIRECTORY_SEPARATOR . 'dist' . DIRECTORY_SEPARATOR . 'client.html'));
   }
+
+	public static function middleware()
+	{
+		return [
+			Auth::class .':run'
+		];
+	}
 }

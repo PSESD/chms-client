@@ -7,7 +7,7 @@
  */
 namespace CHMS\Client\Http\Middleware;
 
-class Session
+class Auth
 {
   private $container;
 
@@ -20,10 +20,10 @@ class Session
    */
   public function run($request, $response, $next)
   {
-    $this->container['session']->register();
-    @session_name(env('SESSION_NAME', 'CHMSSES'));
-    @session_start();
-    $response = $next($request, $response);
-    return $response;
+    $token = $this->container['token']();
+    if (!$token) {
+      return $response->withRedirect('/login');
+    }
+    return $next($request, $response);
   }
 }
