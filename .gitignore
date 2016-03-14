@@ -1,5 +1,7 @@
 node_modules
 dist
-app/bower_components
+client/bower_components
 .tmp
 .publish/
+docker-compose.yml
+/vendor/

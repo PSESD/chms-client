@@ -1,0 +1,30 @@
+{
+    "name": "psesd/chms-client",
+    "type": "project",
+    "require": {
+        "slim/slim": "^3.3",
+        "predis/predis": "^1.0",
+        "guzzlehttp/guzzle": "^6.1",
+        "league/oauth2-client": "^1.3",
+        "canis/slim-boot": "dev-master",
+        "vlucas/phpdotenv": "^2.2",
+        "symfony/var-dumper": "^3.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jacob Morrison",
+            "email": "jmorrison@psesd.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CHMS\\Client\\": "proxy/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CHMSTests\\Client\\": "tests/"
+        }
+    }
+}

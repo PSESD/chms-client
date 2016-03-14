@@ -1,0 +1,29 @@
+web:
+  image: jacobom/lemp:web-php-5.6
+  restart: always
+  volumes:
+    - ./:/var/www
+  ports:
+    - "80"
+  expose:
+    - "80"
+  links:
+    - cache
+  privileged: true
+  cpu_shares: 512
+  environment:
+    TZ: "America/Los_Angeles"
+    VIRTUAL_HOST: "chms-client.docker"
+    NGINX_ERROR_LOG_LEVEL: "notice"
+    APP_ENV: "development"
+    GITHUB_API_TOKEN: "$GITHUB_TOKEN"
+    NGINX_PUBLIC_DIRECTORY: "dist"
+cache:
+  restart: always
+  image: jacobom/lemp:redis
+  ports:
+    - "6379"
+  expose:
+    - "6379"
+  environment:
+    TZ: "America/Los_Angeles"
