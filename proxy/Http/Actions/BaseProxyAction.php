@@ -47,7 +47,7 @@ abstract class BaseProxyAction
     }
     $body = null;
     if (in_array($method, ['PUT', 'POST', 'PATCH'])) {
-      $body = $request->getBody()->getContents();
+      $body = json_encode($request->getParsedBody());
     }
     return $client->handle($method, $path, $headers, $body);
   }

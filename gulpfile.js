@@ -9,6 +9,7 @@ var glob = require('glob');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var babelify = require('babelify');
+var debowerify = require('debowerify');
 
 var runSequence = require('run-sequence');
 var path = require('path');
@@ -98,20 +99,27 @@ gulp.task('jscs', function() {
 function buildBundle(file) {
   return browserify({
     entries: [file],
-    debug: isProd
-  }).transform(babelify, {presets: ['es2015']}) // es6 -> e5
+    debug: true
+  })
+  .transform(babelify, {presets: ['es2015']}) // es6 -> e5
+  .transform(debowerify, {preferNPM: true})
   .bundle();
 }
 
-gulp.task('deamd', function() {
-  return browserify(src('./bower_components/orbit.js/orbit.js'))
-  .transform('deamdify')
-  .bundle()
-  .pipe(source('amd.packages.js'))
-  .pipe(gulp.dest(tmp('./scripts')));
-});
+// gulp.task('deamd', function() {
+//   return browserify([
+//     src('../libraries/orbit-dev/orbit.js'),
+//     src('../libraries/orbit-dev/orbit-common.js'),
+//     src('../libraries/orbit-dev/orbit-common-jsonapi.js'),
+//     src('../libraries/orbit-dev/orbit-common-local-storage.js')
+//   ])
+//   .transform('deamdify')
+//   .bundle()
+//   .pipe(source('amd.packages.js'))
+//   .pipe(gulp.dest(tmp('./scripts')));
+// });
 
-gulp.task('jsbundle', ['deamd'], function() {
+gulp.task('jsbundle', function() {
   console.log('==Building JS bundle==');
 
   //var dest = isProd ? 'dist' : '';

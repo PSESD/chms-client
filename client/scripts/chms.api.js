@@ -1,4 +1,7 @@
 'use strict';
+var $ = require('jquery');
+var jQuery = $;
+// require('backbone-jsonapi')(Backbone, _);
 
 export class BaseCHMSApi {
   constructor(app, apiName, version) {
@@ -13,7 +16,25 @@ export class BaseCHMSApi {
   }
 
   get api() {
-    return true;
+    if (this._api === undefined) {
+      this._api = this._loadApi();
+    }
+    return this._api;
+  }
+
+  _loadApi() {
+    var api = {};
+    this._loadSchema(api);
+    console.log(['api', api]);
+    return api;
+  }
+
+  _loadSchema(api) {
+    return {};
+  }
+
+  _adapterConfig() {
+    return {};
   }
 
   // Loads the  API and returns a promise.

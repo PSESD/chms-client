@@ -32,10 +32,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       next();
     }
 
-    function auth(ctx, next) {
-      app.authenticate(ctx, next);
-    }
-
     // Routes
     page('*', scrollToTop, closeDrawer, function(ctx, next) {
       next();
@@ -45,7 +41,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app.route = 'logout';
     });
 
-    page('*', auth, function(ctx, next) {
+    page('*', function(ctx, next) {
       next();
     });
 

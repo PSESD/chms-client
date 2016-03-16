@@ -46,7 +46,12 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+    "backbone-jsonapi": "^0.1.6",
     "deamd": "^1.0.0",
-    "deamdify": "^0.2.0"
+    "deamdify": "^0.2.0",
+    "debowerify": "^1.4.1",
+    "jquery": "^2.2.1",
+    "underscore": "^1.8.3",
+    "web-component-tester": "^4.2.2"
   }
 }
