@@ -34,24 +34,21 @@ module.exports = function (api) {
       'url': API_BASE_URL + url,
       'model': api.models[modelName]
     });
-    api.collections[modelName +'s'] = new ObjectCollection();
+    api.collections[modelName] = new ObjectCollection();
   });
 
-  // var model = api.collections.Users.create( {
-  //   'first_name': 'Jacob',
-  //   'last_name': 'Morrison',
-  //   'email': 'jjj@jjj.com',
-  //   'password': 'jjjjjj'
+  var MeModel = api.models.User.extend({
+    'url': API_BASE_URL + '/users/self'
+  });
+  api.models.Me = new MeModel;
+
+  // api.collections.Users.fetch({
+  //   'success': function (collection, response, options) {
+  //     console.log(collection.pluck('first_name'));
+  //     console.log(['done', collection, response, options])
+  //   },
+  //   'error': function(collection, response, options) {
+  //     console.log(['error', collection, response, options]);
+  //   }
   // });
-  // console.log(model);
-
-  api.collections.Users.fetch({
-    'success': function (collection, response, options) {
-      console.log(collection.pluck('first_name'));
-      console.log(['done', collection, response, options])
-    },
-    'error': function(collection, response, options) {
-      console.log(['error', collection, response, options]);
-    }
-  });
 };

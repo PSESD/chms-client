@@ -37,20 +37,28 @@ export class BaseCHMSApi {
     return {};
   }
 
-  // Loads the  API and returns a promise.
-  init() {
-    // Return the API if it's already loaded.
-    if (this.loaded) {
-      return Promise.resolve(this.api);
-    }
 
-    // Ensure we only load the client lib once. Subscribers will race for it.
-    if (!this._loadedPromise) {
-      this._loadedPromise = new Promise((resolve, reject) => {
-        resolve(this.api);
+  get(modelName, id) {
+    if (this.api.collections[modelName] === undefined) {
+      return Promise.reject(false);
+    }
+    if (this.api.collections[modelName].get(id) !== undefined) {
+      return Promise.resolve(this.api.collections[modelName].get(id));
+    }
+    return new Promise((resolve, reject) => {
+      var _this = this;
+      var url = this.api.collections[modelName].url +"/"+ id;
+      var model = new this.api.collections[modelName].model().fetch({
+        'url': url,
+        'success': function (model, response, options) {
+          _this.api.collections[modelName].add(model, {});
+          resolve(model);
+        },
+        'error': function (model, response, options) {
+          reject(model);
+        }
       });
-    }
+    });
 
-    return this._loadedPromise;
   }
 }

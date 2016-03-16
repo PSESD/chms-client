@@ -15,8 +15,18 @@ export class CHMSHubApi extends BaseCHMSApi {
     };
   }
   fetchMe(q) {
-    return this.init().then(api => {
-      console.log('fetch me!');
-    });
+    if (this.api.models.Me.isNew) {
+      return new Promise((resolve, reject) => {
+        this.api.models.Me.fetch({
+          'success': function (model, response, options) {
+            resolve(model);
+          },
+          'error': function (model, response, options) {
+            reject(model);
+          }
+        });
+      });
+    }
+    return Promise.resolve(this.api.models.Me);
   }
 }

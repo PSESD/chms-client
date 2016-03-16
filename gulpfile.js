@@ -14,6 +14,7 @@ var debowerify = require('debowerify');
 var runSequence = require('run-sequence');
 var path = require('path');
 var ghPages = require('gulp-gh-pages');
+var notify = require("gulp-notify");
 
 var isProd = false;
 
@@ -77,7 +78,8 @@ gulp.task('styles', function() {
     .pipe($.license('MIT', {
       organization: 'Puget Sound Educational Service District'
     }))
-    .pipe(gulp.dest(dist('./styles')));
+    .pipe(gulp.dest(dist('./styles')))
+    .pipe(notify("Done with styles"));
 });
 
 /** Scripts */
@@ -131,6 +133,7 @@ gulp.task('jsbundle', function() {
       organization: 'Puget Sound Educational Service District'
     }))
     .pipe(gulp.dest('./' + dest + '/scripts'))
+    .pipe(notify("Done with JS Bundle"))
 });
 
 /** Root */
@@ -214,6 +217,7 @@ gulp.task('vulcanize', function() {
     .pipe($.if('*.html', minifyHtml())) // Minify html output
     // .pipe($.if('*.js', uglifyJS())) // Minify js output
     .pipe(gulp.dest(dist('./elements')))
+    .pipe(notify("Done with Vulcanize"))
 });
 
 /** Watches */

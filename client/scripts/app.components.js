@@ -10,7 +10,19 @@ module.exports = function (app) {
   app.apis.hub = new CHMSHubApi(app);
   //app.apis.provider = new CHMSProviderApi(app);
 
-  app.apis.hub.fetchMe();
+  var fetchMe = app.apis.hub.fetchMe().then(function(result) {
+    console.log(['fetchMeSuccess', result.attributes]);
+      var fetchAll = app.apis.hub.all('User').then(function(result) {
+        console.log(['fetchAllSuccess', result]);
+      },
+      function(result) {
+        console.log(['fetchAllFailed', result]);
+      });
+  },
+  function(result) {
+    console.log(['fetchMeFailed', result]);
+  });
+  console.log(['fetchMePromise', fetchMe]);
 
   // Scroll page to top and expand header
   app.scrollPageToTop = function() {
