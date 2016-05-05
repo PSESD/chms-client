@@ -146,6 +146,8 @@ gulp.task('root', function() {
     .pipe(gulp.dest(dist()));
 
   gulp.src([src('./data/*.json')]).pipe(gulp.dest(dist('./data')));
+  gulp.src([src('./views/*.html')]).pipe(gulp.dest(dist('./views')));
+  gulp.src([src('./elements/pages/**/*.html')]).pipe(gulp.dest(dist('./elements/pages')));
 
   return gulp.src(src('./favicon.ico'))
     .pipe(gulp.dest(dist('./')));
@@ -222,10 +224,9 @@ gulp.task('vulcanize', function() {
 
 /** Watches */
 gulp.task('watch', function() {
-  gulp.watch(src('./styles/**/*.scss'), ['styles']);
-  gulp.watch(src('./*.html'), ['root']);
+  gulp.watch([src('./views/*.html'), src('./elements/pages/**/*.html')], ['root']);
   // gulp.watch('./sw-import.js', ['serviceworker']);
-  gulp.watch(src('./elements/**/*.html'), ['vulcanize']);
+  gulp.watch([src('./elements/**/*.html'), src('./styles/app-theme.html')], ['vulcanize']);
   gulp.watch(src('./images/**/*.*'), ['images']);
   gulp.watch([src('./data/**/*.*'), src('./scripts/**/*.js')], ['js', 'jsbundle']);
 });

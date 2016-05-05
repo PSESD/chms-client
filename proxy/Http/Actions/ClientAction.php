@@ -42,7 +42,7 @@ class ClientAction
   public static function run($request, $response, $args, $container)
 	{
     $body = $response->getBody();
-    $body->write(file_get_contents(APP_BASE_PATH . DIRECTORY_SEPARATOR . 'dist' . DIRECTORY_SEPARATOR . 'client.html'));
+    $body->write(file_get_contents(APP_BASE_PATH . DIRECTORY_SEPARATOR . 'dist' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'client.html'));
   }
 
 	public static function middleware()

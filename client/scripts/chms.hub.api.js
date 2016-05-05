@@ -14,6 +14,10 @@ export class CHMSHubApi extends BaseCHMSApi {
         'base': '/api/hub'
     };
   }
+  all(model) {
+      return new Promise((resolve, reject) => {
+      });
+  }
   fetchMe(q) {
     if (this.api.models.Me.isNew) {
       return new Promise((resolve, reject) => {
