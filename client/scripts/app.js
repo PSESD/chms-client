@@ -4,6 +4,8 @@ var jQuery = $;
 (function(document) {
   'use strict';
 
+  require('./bootstrap')();
+
   var app = document.querySelector('#app');
 
   app.renderPage = function(section, page, params) {

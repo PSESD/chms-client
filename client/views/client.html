@@ -31,22 +31,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="PSK">
-  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+  <link rel="icon" sizes="192x192" href="/images/touch/chrome-touch-icon-192x192.png">
 
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
-  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="/images/touch/apple-touch-icon.png">
 
   <!-- Tile icon for Win8 (144x144) -->
-  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <meta name="msapplication-TileImage" content="/images/touch/ms-touch-icon-144x144-precomposed.png">
 
   <!-- build:css styles/main.css -->
-  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="/styles/main.css">
   <!-- endbuild-->
 
-  <link rel="import" href="elements/elements.html">
+  <link rel="import" href="/elements/elements.html">
 
   <!-- For shared styles, shared-styles.html import in elements.html -->
   <style is="custom-style" include="shared-styles"></style>
@@ -66,21 +66,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-toolbar>
 
         <!-- Drawer Content -->
-        <paper-menu attr-for-selected="data-route" selected="[[route]]">
-          <a data-route="home" href="{{baseUrl}}">
-            <iron-icon icon="home"></iron-icon>
-            <span>Transcript</span>
-          </a>
-
-          <a data-route="permissions" href="{{baseUrl}}permissions">
-            <iron-icon icon="icons:visibility"></iron-icon>
-            <span>Permissions</span>
-          </a>
-
-          <a data-route="profile" href="{{baseUrl}}profile">
-            <iron-icon icon="account-circle"></iron-icon>
-            <span>Profile</span>
-          </a>
+        <paper-menu id="main-menu" attr-for-selected="data-route" selected="[[route]]">
         </paper-menu>
       </paper-scroll-header-panel>
 
@@ -133,7 +119,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   </template>
 
- <script src="scripts/bundle.js"></script>
+ <script src="/scripts/bundle.js"></script>
 </body>
 
 </html>

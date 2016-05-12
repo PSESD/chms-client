@@ -9,7 +9,7 @@ var API_BASE_URL = '/api/hub';
 module.exports = function (api) {
   require('backbone-relational');
   require('backbone-relational-jsonapi');
-  console.log(Backbone);
+  // console.log(Backbone);
   var BaseModel = Backbone.RelationalModel.extend({
     toJSON: function(options) {
       return {'data': {'type': this.type, 'attributes': _.clone(this.attributes)}};

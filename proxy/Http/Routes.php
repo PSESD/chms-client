@@ -20,12 +20,12 @@ class Routes extends ActionMap
   public static function actions()
 	{
 		return [
-      Actions\ClientAction::class,
       Actions\LoginAction::class,
       Actions\LogoutAction::class,
       Actions\ResolveAction::class,
       Actions\HubProxyAction::class,
       Actions\ProviderProxyAction::class,
+      Actions\ClientAction::class,
     ];
   }
 }

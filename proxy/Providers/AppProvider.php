@@ -71,7 +71,7 @@ class AppProvider implements ServiceProviderInterface
     };
 
     $container['session'] = function() use ($container) {
-      return new \Predis\Session\Handler($container['redis']);
+      return new \Predis\Session\Handler($container['redis'], ['gc_maxlifetime' => 3600*12]);
     };
 
     $container['redirectToIntent'] = function() {

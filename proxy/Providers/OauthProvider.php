@@ -47,9 +47,13 @@ class OauthProvider implements ServiceProviderInterface
     $container['refreshToken'] = function() use ($container) {
       return function(AccessToken $oldToken) use ($container) {
         $provider = $container['oauth'];
-        $accessToken = $provider->getAccessToken('refresh_token', [
-          'refresh_token' => $oldToken->getRefreshToken()
-        ]);
+        try {
+          $accessToken = $provider->getAccessToken('refresh_token', [
+            'refresh_token' => $oldToken->getRefreshToken()
+          ]);
+        } catch (\Exception $e) {
+          $accessToken = null;
+        }
         if (!empty($accessToken)) {
           $_SESSION['token'] = $accessToken->jsonSerialize();
           return $accessToken;

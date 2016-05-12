@@ -45,27 +45,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     page('*', function(ctx, next) {
       next();
     });
-
-    page('*', function(ctx, next) {
-      console.log('handling page...');
-      app.engine.handle(ctx, function() {
-        console.log('page load success!');
-      }, function() {
-        console.log('page load error!');
-        next();
+    var pages = app.engine.pages;
+    for (var route in pages) {
+      var config = pages[route];
+      page(route, function(ctx, next) {
+        ctx.route = route;
+        app.engine.handle(ctx, function() {
+        }, function() {
+          next();
+        });
       });
-    });
+    };
+
 
     // 404
-    page('*', function() {
+    page('*', function(ctx) {
       app.$.toast.text = 'Can\'t find: ' + window.location.href  + '. Redirected you to Home Page';
       app.$.toast.show();
-      page.redirect(app.baseUrl);
+      console.log(['not found', ctx]);
+      // page.redirect(app.baseUrl);
     });
 
     // add #! before urls
     page({
-      hashbang: true
+     // hashbang: true
     });
 
   });

@@ -4,14 +4,12 @@ import {CHMSHubApi} from './chms.hub.api';
 import {CHMSProviderApi} from './chms.provider.api';
 
 module.exports = function (app) {
-
-  console.log('loading components');
   app.config = require('../data/config');
   app.engine = new CHMSAppEngine(app);
   app.apis = {};
   app.apis.hub = new CHMSHubApi(app);
   //app.apis.provider = new CHMSProviderApi(app);
-  console.log(['app', app]);
+  // console.log(['app', app]);
   var fetchMe = app.apis.hub.fetchMe().then(function(result) {
     console.log(['fetchMeSuccess', result.attributes]);
       var fetchAll = app.apis.hub.all('User').then(function(result) {

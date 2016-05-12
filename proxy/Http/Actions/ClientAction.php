@@ -33,7 +33,7 @@ class ClientAction
    */
 	public static function getPath()
 	{
-		return '/';
+		return '{location:.*}';
 	}
 
   /**
