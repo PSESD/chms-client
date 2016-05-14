@@ -40,13 +40,24 @@ export class CHMSAppEngine {
     }
   }
 
+  generatePath(context, route) {
+    for (var k in context.params) {
+      if (k != 0) {
+        route = route.replace(':' + k, context.params[k]);
+      }
+    }
+    return route;
+  }
+
   updateMenu(context, section) {
+    var _this = this;
     var menu = this.collectMenuItems(section);
     var $menu = $("#main-menu");
     Polymer.dom($menu.get(0)).innerHTML = '';
     var i = 1;
+    console.log(['menu', menu]);
     jQuery.each(menu, function(route, config) {
-      var $a = $("<a />", {'href': context.path(route)});
+      var $a = $("<a />", {'href': _this.generatePath(context, route)});
       $("<iron-icon />", {'icon': config.icon}).appendTo($a);
       $("<span />").html(config.label).appendTo($a);
       if (context.route === route) {
@@ -93,48 +104,96 @@ export class CHMSAppEngine {
     var pages = {};
     pages['/'] = {
       section: 'students',
-      name: 'transcript',
+      name: 'student-transcript',
       available: true,
-      icon: 'home',
+      icon: 'icons:home',
       label: 'Transcript'
     };
     pages['/permissions'] = {
       section: 'students',
-      name: 'permissions',
+      name: 'user-permissions',
       available: true,
       icon: 'icons:visibility',
       label: 'Permissions'
     };
     pages['/profile'] = {
       section: 'students',
-      name: 'profile',
+      name: 'user-profile',
       available: true,
       icon: 'icons:account-circle',
       label: 'Profile'
     };
     pages['/admin'] = {
-      section: 'admin',
-      name: 'adminHome',
+      section: 'admin-home',
+      name: 'home',
       available: true,
-      icon: 'icons:account-circle',
+      icon: 'icons:home',
       label: 'Dashboard'
     };
 
     pages['/sponsors/:sponsor'] = {
       section: 'sponsors',
-      name: 'sponsorHome',
+      name: 'sponsor-home',
       available: true,
-      icon: 'icons:account-circle',
+      icon: 'icons:home',
       label: 'Dashboard'
     };
 
-    pages['/sponsors/:sponsor'] = {
+    pages['/sponsors/:sponsor/classes'] = {
       section: 'sponsors',
-      name: 'sponsorHome',
+      name: 'class-list',
       available: true,
       icon: 'icons:account-circle',
-      label: 'Dashboard'
+      label: 'Classes'
     };
+
+    pages['/sponsors/:sponsor/classes/:class'] = {
+      section: 'classes',
+      name: 'view-class',
+      available: true,
+      icon: 'icons:class',
+      label: 'Class Dashboard'
+    };
+
+    pages['/sponsors/:sponsor/classes/:class/records'] = {
+      section: 'classes',
+      name: 'class-records',
+      available: true,
+      icon: 'icons:assignment-ind',
+      label: 'Records'
+    };
+
+    pages['/sponsors/:sponsor/classes/:class/evaluation-responses'] = {
+      section: 'classes',
+      name: 'class-eval-responses',
+      available: true,
+      icon: 'icons:question-answer',
+      label: 'Evaluation Responses'
+    };
+
+    pages['/sponsors/:sponsor/evaluations'] = {
+      section: 'sponsors',
+      name: 'sponsor-evaluations',
+      available: true,
+      icon: 'icons:question-answer',
+      label: 'Evaluations'
+    };
+    pages['/sponsors/:sponsor/locations'] = {
+      section: 'sponsors',
+      name: 'sponsor-locations',
+      available: true,
+      icon: 'icons:flag',
+      label: 'Locations'
+    };
+
+    pages['/sponsors/:sponsor/topics'] = {
+      section: 'sponsors',
+      name: 'sponsor-topics',
+      available: true,
+      icon: 'icons:group-work',
+      label: 'Topics'
+    };
+
     return pages;
   }
 }

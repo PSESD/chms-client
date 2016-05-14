@@ -45,16 +45,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     page('*', function(ctx, next) {
       next();
     });
-    var pages = app.engine.pages;
-    for (var route in pages) {
-      var config = pages[route];
-      page(route, function(ctx, next) {
+
+    function createPageRoute(route) {
+      return function(ctx, next) {
         ctx.route = route;
         app.engine.handle(ctx, function() {
         }, function() {
           next();
         });
-      });
+      };
+    }
+
+    var pages = app.engine.pages;
+    for (var route in pages) {
+      var config = pages[route];
+      page(route, createPageRoute(route));
     };
 
 

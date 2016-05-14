@@ -9,7 +9,7 @@ var jQuery = $;
   var app = document.querySelector('#app');
 
   app.renderPage = function(section, page, params) {
-    $("#content").html('').append($("<" + page +"-page />"));
+    $("#content").html('').append($("<" + page +" />"));
   };
 
   app.DEBUG = location.search.indexOf('debug') !== -1;
