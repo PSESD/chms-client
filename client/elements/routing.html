@@ -56,7 +56,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       };
     }
 
-    var pages = app.engine.pages;
+    var pages = app.engine.allPages;
     for (var route in pages) {
       var config = pages[route];
       page(route, createPageRoute(route));

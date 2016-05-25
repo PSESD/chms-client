@@ -67,6 +67,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <!-- Drawer Content -->
         <paper-menu id="main-menu" attr-for-selected="data-route" selected="[[route]]">
+          <div class="base-area">
+          </div>
+          <div class="privileged-area">
+          </div>
         </paper-menu>
       </paper-scroll-header-panel>
 
@@ -79,8 +83,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <span class="space"></span>
 
           <!-- Toolbar icons -->
-          <paper-icon-button icon="refresh"></paper-icon-button>
-          <paper-icon-button icon="search"></paper-icon-button>
+          <a href="/logout" rel="external"><paper-icon-button icon="icons:exit-to-app"></paper-icon-button></a>
+
+          <!-- <paper-icon-button icon="search"></paper-icon-button> -->
 
           <!-- Application name -->
           <div class="middle middle-container">
@@ -89,8 +94,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-toolbar>
 
         <!-- Main Content -->
-        <div class="content" id="content">
-        </div>
+        <paper-material elevation="1" id="content-container">
+          <div class="content" id="content">
+          </div>
+        </paper-material>
       </paper-scroll-header-panel>
     </paper-drawer-panel>
 

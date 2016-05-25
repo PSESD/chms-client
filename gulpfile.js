@@ -226,8 +226,9 @@ gulp.task('vulcanize', function() {
 gulp.task('watch', function() {
   gulp.watch([src('./views/*.html'), src('./elements/pages/**/*.html')], ['root']);
   // gulp.watch('./sw-import.js', ['serviceworker']);
-  gulp.watch([src('./elements/**/*.html'), src('./styles/app-theme.html')], ['vulcanize']);
+  gulp.watch([src('./elements/**/*.html'), src('./styles/app-theme.html'), src('./styles/shared-styles.html')], ['vulcanize']);
   gulp.watch(src('./images/**/*.*'), ['images']);
+  gulp.watch(src('./styles/*.css'), ['styles']);
   gulp.watch([src('./data/**/*.*'), src('./scripts/**/*.js')], ['js', 'jsbundle']);
 });
 
