@@ -182,7 +182,7 @@ export class CHMSAppEngine {
   get allContexts() {
     var pages = {};
 
-    pages['/'] = {
+    pages['/transcript'] = {
       section: 'students',
       name: 'students',
       available: true,
@@ -226,11 +226,11 @@ export class CHMSAppEngine {
 
   get allPages() {
     var pages = {};
-    pages['/'] = {
+    pages['/transcript'] = {
       section: 'students',
       name: 'student-transcript',
       available: true,
-      icon: 'icons:home',
+      icon: 'icons:assignment-ind',
       label: 'Transcript'
     };
 
@@ -276,7 +276,7 @@ export class CHMSAppEngine {
         return context.me.hasAccess('admin');
       },
       icon: 'social:domain',
-      label: 'Sponsor'
+      label: 'Sponsors'
     };
 
     pages['/admin/users'] = {

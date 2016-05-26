@@ -164,7 +164,7 @@ gulp.task('copy_bower_components', function() {
   gulp.src([src('bower_components/sw-toolbox/*.js')])
     .pipe(gulp.dest(dist('./sw-toolbox')));
   gulp.src([src('bower_components/platinum-sw/bootstrap/*.js')])
-    .pipe(gulp.dest(dist('.//elements/bootstrap')));
+    .pipe(gulp.dest(dist('./elements/bootstrap')));
 });
 
 /** HTML */
@@ -222,11 +222,30 @@ gulp.task('vulcanize', function() {
     .pipe(notify("Done with Vulcanize"))
 });
 
+gulp.task('vulcanize-landing', function() {
+  console.log('==Vulcanizing Landing Page HTML Imports==');
+
+  return gulp.src(src('./elements/landing.html'))
+    .pipe($.vulcanize({
+      inlineScripts: true,
+      inlineCss: true,
+      stripComments: true,
+      //excludes: [path.resolve('./dist/third_party/polymer.html')]
+      //stripExcludes: false,
+    }))
+    .pipe($.crisper()) // Separate JS into its own file for CSP compliance and reduce html parser load.
+    .pipe($.if('*.html', minifyHtml())) // Minify html output
+    // .pipe($.if('*.js', uglifyJS())) // Minify js output
+    .pipe(gulp.dest(dist('./elements')))
+    .pipe(notify("Done with Vulcanize Landing"))
+});
+
 /** Watches */
 gulp.task('watch', function() {
   gulp.watch([src('./views/*.html'), src('./elements/pages/**/*.html')], ['root']);
   // gulp.watch('./sw-import.js', ['serviceworker']);
   gulp.watch([src('./elements/**/*.html'), src('./styles/app-theme.html'), src('./styles/shared-styles.html')], ['vulcanize']);
+  gulp.watch([src('./elements/landing.html')], ['vulcanize-landing']);
   gulp.watch(src('./images/**/*.*'), ['images']);
   gulp.watch(src('./styles/*.css'), ['styles']);
   gulp.watch([src('./data/**/*.*'), src('./scripts/**/*.js')], ['js', 'jsbundle']);
@@ -246,7 +265,7 @@ gulp.task('bump', function() {
 
 gulp.task('default', function() {
   isProd = true;
-  return runSequence('clean', 'js', allTasks, 'vulcanize', 'precache',
+  return runSequence('clean', 'js', allTasks, 'vulcanize', 'vulcanize-landing', 'precache',
                      'copy_bower_components');
 })
 

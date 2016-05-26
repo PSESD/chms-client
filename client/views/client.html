@@ -94,10 +94,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-toolbar>
 
         <!-- Main Content -->
-        <paper-material elevation="1" id="content-container">
-          <div class="content" id="content">
-          </div>
-        </paper-material>
+        <div id="client-container">
+          <paper-material elevation="1">
+            <div class="content" id="content">
+            </div>
+          </paper-material>
+        </div>
       </paper-scroll-header-panel>
     </paper-drawer-panel>
 
@@ -125,7 +127,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="version">@VERSION@</div>
 
   </template>
-
  <script src="/scripts/bundle.js"></script>
 </body>
 

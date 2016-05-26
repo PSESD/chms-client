@@ -21,10 +21,12 @@ class Routes extends ActionMap
 	{
 		return [
       Actions\LoginAction::class,
+      Actions\RegisterAction::class,
       Actions\LogoutAction::class,
       Actions\ResolveAction::class,
       Actions\HubProxyAction::class,
       Actions\ProviderProxyAction::class,
+      Actions\HomeAction::class,
       Actions\ClientAction::class,
     ];
   }

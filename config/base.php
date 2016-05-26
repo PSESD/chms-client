@@ -25,6 +25,7 @@ $config['settings']['oauth'] = [
   'clientSecret'            => env('API_CLIENT_SECRET'),
   'redirectUri'             => env('CLIENT_URL') . '/resolve',
   'urlAuthorize'            => env('AUTH_AUTHORIZE_URL'),
+  'urlRegister'            => env('AUTH_REGISTER_URL'),
   'urlAccessToken'          => env('AUTH_ACCESS_TOKEN_URL'),
   'urlResourceOwnerDetails' => ''
 ];

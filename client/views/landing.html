@@ -1,0 +1,142 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1">
+  <title>Clock Hours</title>
+
+  <!-- Place favicon.ico in the `app/` directory -->
+
+  <!-- Chrome for Android theme color -->
+  <meta name="theme-color" content="#2E3AA1">
+
+  <!-- Web Application Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Tile color for Win8 -->
+  <meta name="msapplication-TileColor" content="#3372DF">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="PSK">
+  <link rel="icon" sizes="192x192" href="/images/touch/chrome-touch-icon-192x192.png">
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
+  <link rel="apple-touch-icon" href="/images/touch/apple-touch-icon.png">
+
+  <!-- Tile icon for Win8 (144x144) -->
+  <meta name="msapplication-TileImage" content="/images/touch/ms-touch-icon-144x144-precomposed.png">
+
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="/styles/landing.css">
+  <!-- endbuild-->
+
+  <link rel="import" href="/elements/landing.html">
+
+  <!-- For shared styles, shared-styles.html import in elements.html -->
+  <style is="custom-style" include="shared-styles">
+    paper-scroll-header-panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: var(--paper-grey-200, #eee);
+      /* background for toolbar when it is at its full size */
+      --paper-scroll-header-panel-full-header: {
+        background-image: url(/images/landing-background.png);
+        background-position: left center;
+      };
+      /* background for toolbar when it is condensed */
+      --paper-scroll-header-panel-condensed-header: {
+        background-image: url(/images/landing-background.png);
+        background-position: left center;
+      };
+    }
+    paper-toolbar.tall {
+      background-color: transparent;
+    }
+    paper-toolbar.tall .title {
+      font-size: 40px;
+      margin-left: 60px;
+      -webkit-transform-origin: left center;
+      transform-origin: left center;
+    }
+    .flex-horizontal-with-ratios {
+      @apply(--layout-horizontal);
+      padding: 0 1rem;
+    }
+    .flex-child-medium {
+      @apply(--layout-flex-3);
+    }
+    .flex-child-large {
+      @apply(--layout-flex-4);
+    }
+    paper-button[monster] {
+      @apply(--layout-horizontal);
+      @apply(--layout-center-center);
+      @apply(--paper-font-display1);
+      background-color: var(--primary-background-color);
+      color: var(--primary-text-color);
+      margin-bottom: 1rem;
+    }
+    .button-container > a {
+      text-decoration: none;
+    }
+    .button-container {
+      @apply(--layout-vertical);
+      height: 50vh;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+
+<body unresolved>
+  <span id="browser-sync-binding"></span>
+  <template is="dom-bind" id="app">
+  <div id="landing-container">
+    <paper-scroll-header-panel condenses>
+      <paper-toolbar class="tall">
+        <div class="bottom title">Clock Hours</div>
+      </paper-toolbar>
+
+      <div class="content">
+
+      <div class="container flex-horizontal-with-ratios">
+        <div class="flex-child-large">
+          <paper-material elevation="1">
+          yoooooo
+          </paper-material>
+        </div>
+        <div class="flex-child-medium">
+          <div class="button-container">
+            <a href="/login"><paper-button raised monster>Log In</paper-button></a>
+            <a href="/register"><paper-button raised monster>Register</paper-button></a>
+          </div>
+        </div>
+      </div>
+      </div>
+
+    </paper-scroll-header-panel>
+  </div>
+  </template>
+
+ <script src="/scripts/bundle.js"></script>
+</body>
+
+</html>
