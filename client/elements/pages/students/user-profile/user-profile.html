@@ -1,17 +1,109 @@
+<link rel="import" href="../../../../bower_components/iron-form/iron-form.html" />
+<link rel="import" href="../../../../bower_components/iron-input/iron-input.html" />
+
 <dom-module id="user-profile">
   <template>
     <style>
-      :host {
-        display: block;
-      }
+      :host{
+            @apply(--layout-center);
+        }
+        #form-card {
+            width: 100%;
+        }
 
-      span {
-        @apply(--paper-font-body1);
-      }
+        #errorMessage {
+            background-color: var(--error-background-color);
+            color: var(--error-text-color);
+            text-align: left;
+            padding: 1rem;
+        }
+        #statusMessage {
+            background-color: var(--success-background-color);
+            color: var(--success-text-color);
+            text-align: left;
+            padding: 1rem;
+        }
+        .buffer-above {
+            padding-top: 10px;
+            min-height: 1.5em;
+        }
+        .flex-wrap {
+            @apply(--layout-horizontal);
+        }
+        .flex-wrap div {
+            @apply(--layout-wrap);
+            width: 50%;
+        }
     </style>
 
     <div>
-    PROFILE
+      <paper-card id="form-card">
+      <form is="iron-form" id="form" method="post" action="[[ action ]]">
+        <template is="dom-if" if="{{error}}">
+          <paper-material id="errorMessage">{{error}}</paper-material>
+        </template>
+            <div class="card-content">
+                <content></content>
+
+                <div class="container flex-wrap">
+                    <div>
+                        <paper-input
+                        name="first_name"
+                        value="[[ original.first_name ]]"
+                        label="First Name"
+                        required
+                        auto-validate
+                        ></paper-input>
+                    </div>
+                    <div>
+                        <paper-input
+                        name="last_name"
+                        value="[[ original.last_name ]]"
+                        label="Last Name"
+                        required
+                        auto-validate
+                        ></paper-input>
+                    </div>
+                </div>
+
+                <paper-input
+                    type="email"
+                    name="email"
+                    value="[[ original.first_name ]]"
+                    label="E-Mail Address"
+                    required
+                    auto-validate
+                ></paper-input>
+                <div class="container flex-wrap">
+                    <div>
+                <gold-password-input
+                    strength-meter
+                    name="password"
+                    value="{{password::input}}"
+                    label="Password"
+                    required
+                    auto-validate
+                ></paper-input>
+                </div>
+                <div>
+                <confirm-password-validator password="{{password::input}}" validator-name="registerConfirmPassword"></confirm-password-validator>
+                <paper-input
+                    type="password"
+                    name="password_confirmation"
+                    value="{{passwordConfirm::input}}"
+                    label="Password (confirm)"
+                    validator="registerConfirmPassword"
+                    error-message="Passwords do not match"
+                    required
+                    auto-validate
+                ></paper-input>
+                </div></div>
+            </div>
+            <div class="card-actions">
+                <button type="submit" ><paper-button>Save</paper-button></button>
+            </div>
+        </form>
+        </paper-card>
     </div>
   </template>
 
@@ -21,25 +113,35 @@
 
       Polymer({
         is: 'user-profile',
-
         properties: {
-          items: {
-            type: Array,
-            notify: true,
-          }
+          errors: Array,
+          error: {
+            'type': String,
+            'watch': true
+          },
+          action: String,
+          originalEmail: String,
+          password: String,
+          passwordConfirm: String
         },
-
         ready: function() {
-          this.items = [
-            'Responsive Web App boilerplate',
-            'Iron Elements and Paper Elements',
-            'End-to-end Build Tooling (including Vulcanize)',
-            'Unit testing with Web Component Tester',
-            'Routing with Page.js',
-            'Offline support with the Platinum Service Worker Elements'
-          ];
+            var _this = this;
+            if (this.errors) {
+                var error = '';
+                jQuery.each(this.errors, function(fieldName, errors) {
+                    var field = _this.$.form.elements[fieldName];
+                    field.focus();
+                    error += errors[0] + ' ';
+                });
+                this.error = error;
+            }
+        },
+        submit: function(e) {
+            if (!this.$.form.validate()) return;
+            return true;
         }
-      });
+
+    });
     })();
   </script>
 </dom-module>

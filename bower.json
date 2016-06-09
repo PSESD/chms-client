@@ -15,7 +15,9 @@
     "chms-common-assets": "*",
     "backbone-relational-jsonapi": "^0.0.7",
     "backbone-relational": "^0.10.0",
-    "vaadin-grid": "^1.0.0"
+    "vaadin-grid": "^1.0.0",
+    "gold-elements": "PolymerElements/gold-elements#^1.0.1",
+    "gold-password-input": "^1.1.2"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

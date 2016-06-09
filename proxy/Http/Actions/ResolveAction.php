@@ -42,9 +42,9 @@ class ResolveAction
     }
     $provider = $container['oauth'];
 
-    if (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
+    if (empty($_GET['state']) || empty($_SESSION['oauth2state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
       unset($_SESSION['oauth2state']);
-      return $c['response']->withStatus(500)
+      return $response->withStatus(500)
                            ->withHeader('Content-Type', 'text/html')
                             ->write('Invalid oauth state!');
     } else {
