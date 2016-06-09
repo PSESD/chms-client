@@ -85,21 +85,21 @@ module.exports = function (api) {
     context: ''
   });
 
-  jsonApi.define('sponsor_hub', {
+  jsonApi.define('provider_hub', {
     name: '',
     base_url: ''
   });
 
-  jsonApi.define('sponsor', {
+  jsonApi.define('provider', {
     name: '',
     slug: '',
-    sponsor_hub_id: '',
+    provider_hub_id: '',
     organization_id: '',
     class_number_prefix: ''
   });
 
   jsonApi.define('class_reference', {
-    sponsor_id: '',
+    provider_id: '',
     name: ''
   });
 

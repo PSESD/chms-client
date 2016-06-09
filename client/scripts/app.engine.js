@@ -52,7 +52,7 @@ export class CHMSAppEngine {
       case 'students':
 
       break;
-      case 'sponsors':
+      case 'providers':
 
       break;
       case 'admin':
@@ -200,14 +200,14 @@ export class CHMSAppEngine {
       label: 'Admin'
     };
 
-    pages['/sponsors'] = {
-      section: 'sponsors',
+    pages['/providers'] = {
+      section: 'providers',
       name: 'admin',
       available: function(context) {
-        return context.me.hasAccess('sponsor_access');
+        return context.me.hasAccess('provider_access');
       },
       icon: 'hardware:device-hub',
-      label: 'Sponsors'
+      label: 'Providers'
     };
 
     // pages['/organizations'] = {
@@ -259,24 +259,24 @@ export class CHMSAppEngine {
       label: 'Admin Dashboard'
     };
 
-    pages['/admin/sponsor-hubs'] = {
+    pages['/admin/provider-hubs'] = {
       section: 'admin',
-      name: 'sponsor-hubs',
+      name: 'provider-hubs',
       available: function(context) {
         return context.me.hasAccess('admin');
       },
       icon: 'hardware:device-hub',
-      label: 'Sponsor Hubs'
+      label: 'Provider Hubs'
     };
 
-    pages['/admin/sponsors'] = {
+    pages['/admin/providers'] = {
       section: 'admin',
-      name: 'sponsors',
+      name: 'providers',
       available: function(context) {
         return context.me.hasAccess('admin');
       },
       icon: 'social:domain',
-      label: 'Sponsors'
+      label: 'Providers'
     };
 
     pages['/admin/users'] = {
@@ -290,80 +290,80 @@ export class CHMSAppEngine {
     };
 
 
-    pages['/sponsors/:sponsor'] = {
-      section: 'sponsors',
-      name: 'sponsor-home',
+    pages['/providers/:provider'] = {
+      section: 'providers',
+      name: 'provider-home',
       available: function(context) {
-        return context.me.hasAccess('sponsor_access');
+        return context.me.hasAccess('provider_access');
       },
       icon: 'icons:home',
       label: 'Dashboard'
     };
 
-    pages['/sponsors/:sponsor/classes'] = {
-      section: 'sponsors',
+    pages['/providers/:provider/classes'] = {
+      section: 'providers',
       name: 'class-list',
       available: function(context) {
-        return context.me.hasAccess('sponsor_access');
+        return context.me.hasAccess('provider_access');
       },
       icon: 'icons:account-circle',
       label: 'Classes'
     };
 
-    pages['/sponsors/:sponsor/classes/:class'] = {
+    pages['/providers/:provider/classes/:class'] = {
       section: 'classes',
       name: 'view-class',
       available: function(context) {
-        return context.me.hasAccess('sponsor_access');
+        return context.me.hasAccess('provider_access');
       },
       icon: 'icons:class',
       label: 'Class Dashboard'
     };
 
-    pages['/sponsors/:sponsor/classes/:class/records'] = {
+    pages['/providers/:provider/classes/:class/records'] = {
       section: 'classes',
       name: 'class-records',
       available: function(context) {
-        return context.me.hasAccess('sponsor_access');
+        return context.me.hasAccess('provider_access');
       },
       icon: 'icons:assignment-ind',
       label: 'Records'
     };
 
-    pages['/sponsors/:sponsor/classes/:class/evaluation-responses'] = {
+    pages['/providers/:provider/classes/:class/evaluation-responses'] = {
       section: 'classes',
       name: 'class-eval-responses',
       available: function(context) {
-        return context.me.hasAccess('sponsor_access');
+        return context.me.hasAccess('provider_access');
       },
       icon: 'icons:question-answer',
       label: 'Evaluation Responses'
     };
 
-    pages['/sponsors/:sponsor/evaluations'] = {
-      section: 'sponsors',
-      name: 'sponsor-evaluations',
+    pages['/providers/:provider/evaluations'] = {
+      section: 'providers',
+      name: 'provider-evaluations',
       available: function(context) {
-        return context.me.hasAccess('sponsor_access');
+        return context.me.hasAccess('provider_access');
       },
       icon: 'icons:question-answer',
       label: 'Evaluations'
     };
-    pages['/sponsors/:sponsor/locations'] = {
-      section: 'sponsors',
-      name: 'sponsor-locations',
+    pages['/providers/:provider/locations'] = {
+      section: 'providers',
+      name: 'provider-locations',
       available: function(context) {
-        return context.me.hasAccess('sponsor_access');
+        return context.me.hasAccess('provider_access');
       },
       icon: 'icons:flag',
       label: 'Locations'
     };
 
-    pages['/sponsors/:sponsor/topics'] = {
-      section: 'sponsors',
-      name: 'sponsor-topics',
+    pages['/providers/:provider/topics'] = {
+      section: 'providers',
+      name: 'provider-topics',
       available: function(context) {
-        return context.me.hasAccess('sponsor_access');
+        return context.me.hasAccess('provider_access');
       },
       icon: 'icons:group-work',
       label: 'Topics'
